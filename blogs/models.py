@@ -14,11 +14,16 @@ class Author(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
     class Meta:
         ordering = ['first_name', 'last_name']
 
 
 class Category(models.Model):
+    icon = models.FileField(upload_to='blogs/categories/icons')
     name = models.CharField("Name", max_length=50)
     description = models.TextField(max_length=1000)
 
@@ -46,11 +51,9 @@ class Blog(models.Model):
     image = models.ImageField(upload_to=blog_image_path)
     title = models.CharField("Title", max_length=256)
     body = models.TextField(max_length=2 ** 10)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    author = models.ForeignKey(Author, on_delete=models.PROTECT)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category_blogs")
+    author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name="author_blogs")
     publish_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.category}: {self.title}"
-
-

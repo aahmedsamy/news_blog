@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>News blog | test</title>
+
+    <link href="//fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Template CSS -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static  "css/style-starter.css" %}">
+</head>
+<body>
+<style>
+    .filter-green {
+        filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+    }
+</style>
+{% for cat in header_categories %}
+    <img src="/media/{{ cat.icon }}" class="filter-green" width="100" height="100"/>
+{% endfor %}
+</body>
